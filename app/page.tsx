@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import MainComponent from "@/components/main-component";
 import { createServerClient } from "@/lib/supabase/server";
 import { SupportCard, type FreeFaq } from "@/components/channels-accordion-section";
-import { type FreeItem } from "@/components/channels-list-section";
+import { type FreeItem, type VideoPreview } from "@/components/channels-list-section";
 
 export const dynamic = 'force-dynamic';
 
@@ -54,6 +54,7 @@ export default async function Home() {
 
   const items: FreeItem[] = (itemsResult.data as FreeItem[]) || [];
   const faqItems: FreeFaq[] = (faqResult.data as FreeFaq[]) || [];
+  const videoPreviews: VideoPreview[] = [];
   
   const configs = configsResult.data?.reduce((acc, config) => {
     acc[config.key] = config.value;
@@ -80,6 +81,8 @@ export default async function Home() {
       pageLabel={configs.free_page_label}
       pageDescription={configs.free_page_description}
       ageRestrictImageUrl={configs.age_restrict_image_url}
+      videoPreviews={videoPreviews}
+      videoPreviewsTitle={undefined}
     />
   );
 }

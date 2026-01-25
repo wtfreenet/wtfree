@@ -15,8 +15,10 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog"
 import {
   VIP_18_COOKIE_NAME,
@@ -121,7 +123,7 @@ export default function HeaderSection({ pageLabel, pageDescription, ageRestrictI
   return (
     <section className="mt-6 mb-12 px-6">
       {pageLabel && (
-        <div className="mb-4 text-white text-center text-2xl font-bold uppercase">
+        <div className="mb-4 text-white text-center text-2xl font-bold uppercase break-words">
           {pageLabel}
         </div>
       )}
@@ -165,11 +167,11 @@ export default function HeaderSection({ pageLabel, pageDescription, ageRestrictI
               )}
               <div className="p-6 md:p-4">
                 <DialogHeader className="mb-6">
-                  <div className="text-center text-2xl font-bold text-[#F2F2F2] mb-4">WARNING: This site is for adults only!</div>
-                  <div className="text-center text-[#F2F2F266]">By accessing this website, I confirm that I am 18 years of age or older and agree to the Terms of Use.</div>
+                  <DialogTitle className="text-center text-2xl font-bold text-[#F2F2F2] mb-4">WARNING: This site is for adults only!</DialogTitle>
+                  <DialogDescription className="text-center text-[#F2F2F266]">By accessing this website, I confirm that I am 18 years of age or older and agree to the Terms of Use.</DialogDescription>
                 </DialogHeader>
 
-                <DialogFooter className="flex flex-col gap-2 items-center sm:flex-row sm:justify-center">
+                <DialogFooter className="flex flex-col gap-4 items-center sm:flex-row sm:justify-center">
                   <Button variant="muted" onClick={handleDeny18}>
                   Exit
                   </Button>
@@ -181,7 +183,7 @@ export default function HeaderSection({ pageLabel, pageDescription, ageRestrictI
             <>
               <div className="p-6 md:p-4">
                 <DialogHeader>
-                  <div className="text-center text-2xl font-bold text-[#F2F2F2] mb-4">This site is intended only for users<br />over the age of 21.</div>
+                  <DialogTitle className="text-center text-2xl font-bold text-[#F2F2F2] mb-4">This site is intended only for users<br />over the age of 21.</DialogTitle>
                 </DialogHeader>
 
                 <DialogFooter className="sm:justify-center justify-center">

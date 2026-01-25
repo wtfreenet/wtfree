@@ -1,2 +1,0 @@
-cd /Users/a12345/Downloads/ScriptS/Mass\ Text\ Delete/
-python3 blur_video_text.py

@@ -7,6 +7,7 @@ truncate table
   public.vip_items,
   public.free_faq,
   public.vip_faq,
+  public.video_previews,
   public.configs;
 
 -- Seed data for configs
@@ -15,6 +16,7 @@ insert into public.configs (key, value) values
   ('free_items_label', 'Бесплатные материалы'),
   ('vip_faq_label', 'VIP Поддержка'),
   ('vip_items_label', 'VIP Материалы'),
+  ('video_previews_label', 'Видео превью'),
   ('telegram_free_support_url', 'https://t.me/support_free'),
   ('telegram_vip_support_url', 'https://t.me/support_vip'),
   ('free_banner_url', 'https://picsum.photos/1200/400?random=10'),
@@ -106,3 +108,9 @@ insert into public.vip_faq (label, description, cta_type, cta_label) values
     'Активировать пробный период'
   );
 
+-- Seed data for video_previews
+insert into public.video_previews (link, label, description, cover_url, "order") values
+  ('https://example.com/video/preview1', 'Превью видео 1', 'Краткое описание первого видео превью', 'https://picsum.photos/400/300?random=15', 1),
+  ('https://example.com/video/preview2', 'Превью видео 2', 'Краткое описание второго видео превью', 'https://picsum.photos/400/300?random=16', 2),
+  ('https://example.com/video/preview3', 'Превью видео 3', 'Краткое описание третьего видео превью', 'https://picsum.photos/400/300?random=17', 3),
+  ('https://example.com/video/preview4', 'Превью видео 4', 'Краткое описание четвертого видео превью', 'https://picsum.photos/400/300?random=18', 4);

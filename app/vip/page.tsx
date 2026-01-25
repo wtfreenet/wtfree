@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import MainComponent from "@/components/main-component";
 import { createServerClient } from "@/lib/supabase/server";
 import { SupportCard, type VipFaq } from "@/components/channels-accordion-section";
-import { type VipItem } from "@/components/channels-list-section";
+import { type VipItem, type VideoPreview } from "@/components/channels-list-section";
 
 export const dynamic = 'force-dynamic';
 
@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function VipPage() {
   const supabase = createServerClient();
 
-  const [itemsResult, faqResult, configsResult] = await Promise.all([
+  const [itemsResult, faqResult, videoPreviewsResult, configsResult] = await Promise.all([
     supabase
       .from("vip_items")
       .select("*")
@@ -47,13 +47,18 @@ export default async function VipPage() {
       .select("*")
       .order("created_at", { ascending: true }),
     supabase
+      .from("video_previews")
+      .select("*")
+      .order("order", { ascending: true }),
+    supabase
       .from("configs")
       .select("key, value")
-      .in("key", ["vip_items_label", "vip_faq_label", "telegram_vip_support_url", "vip_banner_url", "vip_page_label", "vip_page_description", "vip_page_seo_title", "vip_page_seo_description", "vip_page_seo_open_graph", "age_restrict_image_url"]),
+      .in("key", ["vip_items_label", "vip_faq_label", "telegram_vip_support_url", "vip_banner_url", "vip_page_label", "vip_page_description", "vip_page_seo_title", "vip_page_seo_description", "vip_page_seo_open_graph", "age_restrict_image_url", "video_previews_label"]),
   ]);
 
   const items: VipItem[] = (itemsResult.data as VipItem[]) || [];
   const faqItems: VipFaq[] = (faqResult.data as VipFaq[]) || [];
+  const videoPreviews: VideoPreview[] = (videoPreviewsResult.data as VideoPreview[]) || [];
   
   const configs = configsResult.data?.reduce((acc, config) => {
     acc[config.key] = config.value;
@@ -80,6 +85,8 @@ export default async function VipPage() {
       pageLabel={configs.vip_page_label}
       pageDescription={configs.vip_page_description}
       ageRestrictImageUrl={configs.age_restrict_image_url}
+      videoPreviews={videoPreviews}
+      videoPreviewsTitle={configs.video_previews_label}
     />
   );
 }

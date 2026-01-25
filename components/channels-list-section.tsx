@@ -4,16 +4,17 @@ import { Database } from "@/lib/supabase/database.types";
 
 export type FreeItem = Database["public"]["Tables"]["free_items"]["Row"];
 export type VipItem = Database["public"]["Tables"]["vip_items"]["Row"];
+export type VideoPreview = Database["public"]["Tables"]["video_previews"]["Row"];
 
 export type ChannelsListSectionProps = {
-  items?: FreeItem[] | VipItem[];
+  items?: FreeItem[] | VipItem[] | VideoPreview[];
   title?: string;
 };
 
 export default function ChannelsListSection({ items = [], title = "Free Telegram Channels" }: ChannelsListSectionProps) {
   return (
     <section className="px-6 mb-12">
-      <div className="text-xl font-medium text-white mb-6">{title}</div>
+      <div className="text-xl font-medium text-white mb-6 break-words">{title}</div>
 
       <div className="space-y-3">
         {items.map((item) => (
@@ -25,7 +26,7 @@ export default function ChannelsListSection({ items = [], title = "Free Telegram
             className="block no-underline"
           >
             <Card className="h-20">
-              <CardContent className="flex gap-3">
+              <CardContent className="px-3 flex items-center gap-3">
                 <img 
                   src={item.cover_url} 
                   alt={item.label} 

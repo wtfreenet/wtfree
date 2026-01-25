@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import BannerSection from "./banner-section";
 import HeaderSection from "./header-section";
-import ChannelsListSection, { type FreeItem, type VipItem } from "./channels-list-section";
+import ChannelsListSection, { type FreeItem, type VipItem, type VideoPreview } from "./channels-list-section";
 import ChannelsAccordionSection, { type FreeFaq, type VipFaq, type SupportCard } from "./channels-accordion-section";
 
 type MainComponentProps = {
@@ -14,6 +14,8 @@ type MainComponentProps = {
   pageLabel?: string;
   pageDescription?: string;
   ageRestrictImageUrl?: string;
+  videoPreviews?: VideoPreview[];
+  videoPreviewsTitle?: string;
 };
 
 export default function MainComponent({ 
@@ -25,7 +27,9 @@ export default function MainComponent({
   bannerUrl,
   pageLabel,
   pageDescription,
-  ageRestrictImageUrl
+  ageRestrictImageUrl,
+  videoPreviews,
+  videoPreviewsTitle
 }: MainComponentProps) {
   return (
     <div className="flex min-h-screen bg-[#1C1C1C]">
@@ -35,6 +39,9 @@ export default function MainComponent({
           <HeaderSection pageLabel={pageLabel} pageDescription={pageDescription} ageRestrictImageUrl={ageRestrictImageUrl} />
         </Suspense>
         <ChannelsListSection items={items} title={itemsTitle} />
+        {videoPreviews && videoPreviews.length > 0 && (
+          <ChannelsListSection items={videoPreviews} title={videoPreviewsTitle} />
+        )}
         <ChannelsAccordionSection faqItems={faqItems} title={faqTitle} supportCard={supportCard} />
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Card, CardContent } from "./ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { Button } from "./ui/button";
 import { Database } from "@/lib/supabase/database.types";
+import SafetyViolationForm from "@/components/safety-violation-form";
 
 export type FreeFaq = Database["public"]["Tables"]["free_faq"]["Row"];
 export type VipFaq = Database["public"]["Tables"]["vip_faq"]["Row"];
@@ -35,7 +36,7 @@ export default function ChannelsAccordionSection({
 
   return (
     <section className="mt-6 px-6 mb-12">
-      <div className="text-xl font-medium text-white mb-2">{title}</div>
+      <div className="text-xl font-medium text-white mb-2 break-words">{title}</div>
 
       <div>
         <Accordion type="single" collapsible>
@@ -63,25 +64,33 @@ export default function ChannelsAccordionSection({
               </AccordionContent>
             </AccordionItem>
           ))}
+          <AccordionItem value="safety-violation-report">
+            <AccordionTrigger>Report a Safety Violation</AccordionTrigger>
+            <AccordionContent className="pt-2">
+              <SafetyViolationForm />
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </div>
 
       <Card className="m-4">
-        <CardContent className="flex pl-3 pr-6">
-          <img src="/notify.svg" alt="notify image" className="size-6 object-cover" />
-          <div className="ml-3 mr-6">
-            <div className="text-[#F2F2F2] font-medium">{support.title}</div>
-            <div className="text-[#F2F2F266]">{support.description}</div>
+        <CardContent className="flex flex-wrap sm:flex-nowrap gap-3 px-6">
+          <div className="flex items-center flex-1 min-w-0">
+            <img src="/notify.svg" alt="notify image" className="size-6 object-cover shrink-0" />
+            <div className="ml-3 min-w-0">
+              <div className="text-[#F2F2F2] font-medium">{support.title}</div>
+              <div className="text-[#F2F2F266] text-xs">{support.description}</div>
+            </div>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center w-full sm:w-auto sm:ml-auto shrink-0">
             {support.buttonUrl ? (
-              <Button asChild>
+              <Button asChild className="w-full sm:w-auto">
                 <a href={support.buttonUrl} target="_blank" rel="noopener noreferrer">
                   {support.buttonLabel}
                 </a>
               </Button>
             ) : (
-              <Button>{support.buttonLabel}</Button>
+              <Button className="w-full sm:w-auto">{support.buttonLabel}</Button>
             )}
           </div>
         </CardContent>
