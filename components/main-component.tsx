@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import BannerSection from "./banner-section";
 import HeaderSection from "./header-section";
 import ChannelsListSection, { type FreeItem, type VipItem } from "./channels-list-section";
@@ -30,7 +31,9 @@ export default function MainComponent({
     <div className="flex min-h-screen bg-[#1C1C1C]">
       <div className="mx-2 sm:mx-auto bg-[#F2F2F20A] max-w-[640px] w-full my-2 md:my-10 rounded-2xl">
         <BannerSection bannerUrl={bannerUrl} />
-        <HeaderSection pageLabel={pageLabel} pageDescription={pageDescription} ageRestrictImageUrl={ageRestrictImageUrl} />
+        <Suspense fallback={<div className="mt-6 mb-12 px-6" />}>
+          <HeaderSection pageLabel={pageLabel} pageDescription={pageDescription} ageRestrictImageUrl={ageRestrictImageUrl} />
+        </Suspense>
         <ChannelsListSection items={items} title={itemsTitle} />
         <ChannelsAccordionSection faqItems={faqItems} title={faqTitle} supportCard={supportCard} />
       </div>
