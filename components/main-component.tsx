@@ -1,0 +1,39 @@
+import BannerSection from "./banner-section";
+import HeaderSection from "./header-section";
+import ChannelsListSection, { type FreeItem, type VipItem } from "./channels-list-section";
+import ChannelsAccordionSection, { type FreeFaq, type VipFaq, type SupportCard } from "./channels-accordion-section";
+
+type MainComponentProps = {
+  items: FreeItem[] | VipItem[];
+  faqItems: FreeFaq[] | VipFaq[];
+  itemsTitle?: string;
+  faqTitle?: string;
+  supportCard?: SupportCard;
+  bannerUrl?: string;
+  pageLabel?: string;
+  pageDescription?: string;
+  ageRestrictImageUrl?: string;
+};
+
+export default function MainComponent({ 
+  items, 
+  faqItems, 
+  itemsTitle,
+  faqTitle,
+  supportCard,
+  bannerUrl,
+  pageLabel,
+  pageDescription,
+  ageRestrictImageUrl
+}: MainComponentProps) {
+  return (
+    <div className="flex min-h-screen bg-[#1C1C1C]">
+      <div className="mx-2 sm:mx-auto bg-[#F2F2F20A] max-w-[640px] w-full my-2 md:my-10 rounded-2xl">
+        <BannerSection bannerUrl={bannerUrl} />
+        <HeaderSection pageLabel={pageLabel} pageDescription={pageDescription} ageRestrictImageUrl={ageRestrictImageUrl} />
+        <ChannelsListSection items={items} title={itemsTitle} />
+        <ChannelsAccordionSection faqItems={faqItems} title={faqTitle} supportCard={supportCard} />
+      </div>
+    </div>
+  );
+}
