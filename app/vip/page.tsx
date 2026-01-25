@@ -4,6 +4,8 @@ import { createServerClient } from "@/lib/supabase/server";
 import { SupportCard, type VipFaq } from "@/components/channels-accordion-section";
 import { type VipItem } from "@/components/channels-list-section";
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   const supabase = createServerClient();
   
