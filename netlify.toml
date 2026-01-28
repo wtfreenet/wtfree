@@ -14,17 +14,7 @@
 
 [[redirects]]
   from = "/*"
-  to = "/not-found"
-  status = 404
-
-[[redirects]]
-  from = "/*"
   to = "/404.html"
   status = 451
   conditions = {Country = ["RU", "BY", "MD", "UA", "IN", "IR", "IQ"]}
 
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 451
-  conditions = {Country = ["RU", "BY"]}
